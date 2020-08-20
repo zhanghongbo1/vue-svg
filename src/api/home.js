@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export const getDetail=(params)=>{
+export const login=(params)=>{
   return request({
-    url: '/detail',
+    url: '/login',
     method: 'post',
     data: params
   })

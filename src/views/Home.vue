@@ -4,7 +4,9 @@
       <svg-icon :icon-class="item" />
       <span>{{item}}</span>
     </div>
-    
+    <div class="width">
+
+    </div>
   </div>
 </template>
 
@@ -20,15 +22,23 @@ export default {
   },
       created() {
         const req = require.context('../icons/svg', false, /\.svg$/)
-            console.log(req.keys())
             let arr=[]
             req.keys().forEach(item=>{
               item=item.split('.')[1].slice(1)
               arr.push(item)
             })
            this.list=arr
-            console.log(this.list)
-        // console.log("./404.svg".split('.')[1].slice(1))
+
+      
       },
 }
 </script>
+
+<style lang="scss">
+  .width{
+    width: 6rem;
+    height: 6rem;
+    background: red;
+  }
+  
+</style>

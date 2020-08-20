@@ -6,14 +6,38 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("../views/Home.vue"),
+    name: "layout",
+    component: () => import("@/components/layout"),
+    redirect:'/list',
+    children:[
+      {
+        path: "home",
+        name: "home",
+        component: () => import("../views/Home.vue"),
+        meta:{
+          title:'我的账单记录'
+        }
+      },
+      {
+        path: "login",
+        name: "login",
+        component: () => import("../views/login.vue"),
+        meta:{
+          title:'登录'
+        }
+      },
+      {
+        path: "list",
+        name: "list",
+        component: () => import("../views/list.vue"),
+        meta:{
+          title:'我的账单记录'
+        }
+      },
+    ]
   },
-  {
-    path: "/lay",
-    name: "lay",
-    component: () => import("../views/lay.vue"),
-  },
+
+
 ];
 
 const router = new VueRouter({
@@ -22,4 +46,14 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to,from,next)=>{
+  document.title=to.meta.title
+  // let token =localStorage.getItem('token')
+  // if(!token){
+  //   router.push('/login')
+  // }else{
+    next()
+  // }
+  
+})
 export default router;

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs' // 处理post请求数据格式
 import { Toast } from 'vant';
-
+import router from '@/router'
 
 let toast=''
 const $axios = axios.create({
@@ -10,7 +10,7 @@ const $axios = axios.create({
   // 基础url，会在请求url中自动添加前置链接
   baseURL: process.env.VUE_APP_BASE_API,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    'Content-Type': 'application/json;charset=UTF-8'
   },
   responseType: 'json',
   // 对发送请求前的请求头进行配置
@@ -42,7 +42,7 @@ $axios.interceptors.request.use(
       message: '加载中...',
       forbidClick: true,
     });
-    const token = localStorage.getItem('token')
+    const token = 'Bearer '+ localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = token // 请求头部添加token
     }
@@ -83,15 +83,29 @@ $axios.interceptors.response.use(
           // Message.error('网络请求不存在')
           Toast.fail('网络请求不存在');
           break
+          case 400:
+            // Message.error('网络请求不存在')
+            Toast.fail('账号或密码错误');
+            break
+            case 403:
+              // Message.error('网络请求不存在')
+              Toast.fail('token过期或失效请重新登录');
+              localStorage.removeItem('token')
+              router.push('/login')
+              break
         default:
           Toast.fail('请求失败');
       }
     } else {
       // 请求超时或者网络有问题
       if (error.message.includes('timeout')) {
+        console.log('bbb')
         Toast.fail('请求超时！请检查网络是否正常')
       } else {
-        Toast.fail('请求失败，请检查网络是否已连接')
+        console.log('aaa')
+        Toast.fail('token失效')
+        localStorage.removeItem('token')
+        router.push('/login')
       }
     }
     return Promise.reject(error)
