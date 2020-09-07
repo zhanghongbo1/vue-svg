@@ -20,7 +20,8 @@ export default {
         defalutActive:0,
         list:[
           {id:0,title:'首页',defalutSrc:require('./img/home.png'),activeSrc:require('./img/home1.png'),url:"/list"},
-          {id:1,title:'个人中心',defalutSrc:require('./img/login.png'),activeSrc:require('./img/login1.png'),url:"/login"}
+          {id:1,title:'个人中心',defalutSrc:require('./img/login.png'),activeSrc:require('./img/login1.png'),url:"/login"},
+          {id:2,title:'设置',defalutSrc:require('./img/sz.png'),activeSrc:require('./img/acsz.png'),url:"/shezhi"}
         ]
       }
     },

@@ -44,7 +44,7 @@
 
     <div class="listTitle" v-for="(item,index) in list" :key="index">
       <div class="inner">
-        <p>{{item.type=='1'?'欠款人姓名:'+item.name:'收款人姓名:'}}</p>
+        <p>{{item.type=='1'?'欠款人姓名:'+item.name:'收款人姓名:'+item.name}}</p>
         <p>手机号：{{item.phone}}</p>
         <p style="font-weight:bold">
           金额：

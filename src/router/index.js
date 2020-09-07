@@ -34,6 +34,14 @@ const routes = [
           title:'我的账单记录'
         }
       },
+      {
+        path: "shezhi",
+        name: "shezhi",
+        component: () => import("../views/shezhi.vue"),
+        meta:{
+          title:'设置'
+        }
+      },
     ]
   },
 
@@ -41,7 +49,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes,
 });

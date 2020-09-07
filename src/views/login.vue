@@ -46,6 +46,13 @@ export default {
       const res = await login({username:this.username,password:this.password})
       if(res.code==200){
         localStorage.setItem('token',res.token)
+        let userArr=JSON.parse(localStorage.getItem('userArr'))||[]
+        console.log(userArr,'userArr')
+        if(userArr.indexOf({username:this.username,password:this.password})<0){
+                  userArr.push({username:this.username,password:this.password})
+                 localStorage.setItem('userArr',JSON.stringify(userArr))
+        }
+ 
         this.$router.push('/')
       }
     },
