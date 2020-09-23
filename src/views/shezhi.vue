@@ -1,9 +1,6 @@
 <template>
   <div class="shezhi">
-        <div class="login" v-for='item in loginArr' :key='item.username' @click="login(item)">
-            <p :class="userName==item.username?'color':''">{{item.username}}</p>
-            <svg-icon v-show="userName==item.username" icon-class="gou" />
-        </div>
+     
         <van-button type="info" @click="out" size="large">退出</van-button>
   </div>
 </template>
@@ -29,16 +26,16 @@ export default {
     
   },
   methods: {
-    async getUserName() {
-      const res = await getLogin({});
-      console.log(res);
-      this.userName=res.data.username
-    },
-  async  login(item){
-       const res = await login({username:item.username,password:item.password})
-       localStorage.setItem('token',res.token)
-       this.getUserName();
-    },
+  //   async getUserName() {
+  //     const res = await getLogin({});
+  //     console.log(res);
+  //     this.userName=res.data.username
+  //   },
+  // async  login(item){
+  //      const res = await login({username:item.username,password:item.password})
+  //      localStorage.setItem('token',res.token)
+  //      this.getUserName();
+  //   },
     out(){
       localStorage.removeItem('token')
       this.$router.push('/')

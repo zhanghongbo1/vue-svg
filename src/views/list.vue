@@ -130,6 +130,7 @@ export default {
         console.log(res);
         if (res.code == 200) {
           this.$toast.success("添加成功");
+          this.getList({ type: this.type ,createTime:this.currentDate,phone:this.seachPhone,name:this.seachName });
         }
       }
     },
@@ -156,7 +157,6 @@ export default {
       this.chooseShow=!this.chooseShow
     },
      confirmChoose(){ //姓名手机号的筛选
-
       this.getList({ type: this.type ,createTime:this.currentDate,phone:this.seachPhone,name:this.seachName });
   },
  async switchChange(item){
