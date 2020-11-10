@@ -7,3 +7,10 @@ export const login=(params)=>{
     data: params
   })
 }
+export const getI=(params)=>{
+  return request({
+    url: '/getI',
+    method: 'post',
+    data: params
+  })
+}

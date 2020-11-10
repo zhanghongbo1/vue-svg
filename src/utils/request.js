@@ -102,10 +102,10 @@ $axios.interceptors.response.use(
         console.log('bbb')
         Toast.fail('请求超时！请检查网络是否正常')
       } else {
-        console.log('aaa')
-        Toast.fail('token失效')
-        localStorage.removeItem('token')
-        router.push('/login')
+        // console.log('aaa')
+        // Toast.fail('token失效')
+        // localStorage.removeItem('token')
+        // router.push('/login')
       }
     }
     return Promise.reject(error)

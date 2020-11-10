@@ -1,65 +1,75 @@
+
 <template>
-  <div class="shezhi">
-     
-        <van-button type="info" @click="out" size="large">退出</van-button>
+  <div class="recommend">
+    <scroll-wrapper :data="disLists" ref="scroll" @pullingUp='pullUp' @pullingDown='pullingDown' class="recommend_wrapper">
+      <div>
+        <p v-for="(item ,index) in disLists" :key='index'>{{item}}</p>
+
+      </div>
+    </scroll-wrapper>
   </div>
 </template>
-
-
-
+ 
 <script>
-import { login  } from "@/api/home";
-import { getLogin } from "@/api/shezhi";
+import ScrollWrapper from '@/components/scroll'
+import { getI } from '@/api/home'
 export default {
+  components: {
+    ScrollWrapper,
+  },
   data() {
     return {
-      userName: "",
-      loginArr:JSON.parse(localStorage.getItem('userArr'))
-    };
-  },
-
-  created() {
-   
-    if(localStorage.getItem('token')){
-      this.getUserName();
+      disLists: [],
+      num: 10,
     }
-    
   },
   methods: {
-  //   async getUserName() {
-  //     const res = await getLogin({});
-  //     console.log(res);
-  //     this.userName=res.data.username
-  //   },
-  // async  login(item){
-  //      const res = await login({username:item.username,password:item.password})
-  //      localStorage.setItem('token',res.token)
-  //      this.getUserName();
-  //   },
-    out(){
-      localStorage.removeItem('token')
-      this.$router.push('/')
-    }
+    async Load() {
+      //图片加载完成事件，如果存在多张banner图片，通过this.checkLoad，只需要一张加载完成，撑开高度，就重新计算better-scroll高度
+      // if (!this.checkLoad) {
+      //   this.$refs.scoll.refresh()
+      //   this.checkLoad = true
+      // }
+      const res = await getI({ num: this.num })
+      this.disLists = res.data
+    },
+    async pullUp() {
+      console.log('加载')
+      console.log(this.num)
+      this.num += 4
+      await this.Load()
+      setTimeout(() => {
+        this.$refs.scroll.refresh()
+        this.$refs.scroll.finishPullUp()
+      }, 200)
+    },
+    async pullingDown() {
+      this.num = 10
+      await this.Load()
+      setTimeout(() => {
+        this.$refs.scroll.refresh()
+        this.$refs.scroll.finishPullDown()
+      }, 200)
+    },
   },
-};
+  async created() {
+    await this.Load()
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-.shezhi{
-  .login{
-    display: flex;
-    padding: 0 10px;
-    margin: 10px 0;
-    background: LightGrey;
-    justify-content: space-between;
-    align-items: center;
-    p{
-      font-size: 18px;
-    }
-    .color{
-      color: #1E90FF;
-    }
+.recommend {
+  width: 100%;
+  height: 100%;
+}
+.recommend_wrapper {
+  height: 100%;
+  overflow: hidden;
+  p {
+    height: 300px;
+    background: red;
+    color: white;
   }
 }
-  
 </style>

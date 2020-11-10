@@ -37,7 +37,7 @@ const routes = [
       {
         path: "shezhi",
         name: "shezhi",
-        component: () => import("../views/shezhi.vue"),
+        component: () => import("../views/shezhi"),
         meta:{
           title:'设置'
         }
