@@ -11,6 +11,14 @@ const routes = [
     redirect:'/list',
     children:[
       {
+        path: "demo",
+        name: "demo",
+        component: () => import("../views/demo.vue"),
+        meta:{
+          title:'我的账单记录'
+        }
+      },
+      {
         path: "home",
         name: "home",
         component: () => import("../views/Home.vue"),

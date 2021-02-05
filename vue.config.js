@@ -27,11 +27,8 @@ module.exports = {
       );
     }
   },
-  chainWebpack(config) {
-    // it can improve the speed of the first screen, it is recommended to turn on preload
-    // it can improve the speed of the first screen, it is recommended to turn on preload
+  chainWebpack: (config) => {
 
-    // set svg-sprite-loader
     config.module.rule("svg").exclude.add(resolve("src/icons")).end();
     config.module
       .rule("icons")
@@ -44,16 +41,17 @@ module.exports = {
         symbolId: "icon-[name]",
       })
       .end();
-    config.module
-      .rule("css")
-      .test(/\.css$/)
-      .oneOf("vue")
-      .resourceQuery(/\?vue/)
-      .use("px2rem")
-      .loader("px2rem-loader")
-      .options({
-        remUnit: 75,
-      })
-      .end();
+    // config.module
+    //   .rule("css")
+    //   .test(/\.css$/)
+    //   .oneOf("vue")
+    //   .resourceQuery(/\?vue/)
+    //   .use("px2rem")
+    //   .loader("px2rem-loader")
+    //   .options({
+    //     remUnit: 200,
+    //   })
+    //   .end();
   },
+  
 };
